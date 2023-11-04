@@ -5,6 +5,25 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+	/* Social */
+	--facebook: rgba(66,103,178,1);
+	--twitter: rgba(29,161,242,1);
+	--tiktok: rgba(0,0,0,1);
+	--tiktok-inner: rgba(255,0,80,1);
+	--tiktok-outer: rgba(0,242,234,1);
+	--linkedin: rgba(0,119,181,1);
+	--youtube: rgba(255,0,0,1);
+	--pinterest: rgb(197, 38, 38);
+	--whatsapp: rgba(37,211,102,1);
+	--whatsapp-bg: rgba(18,140,126,1);
+	--snapchat: rgba(255,252,0,1);
+	--telegram: rgba(0,136,204,1);
+	--twitch: rgba(100,65,165,1);
+	--discord: rgba(114,137,218,1);
+	--google: radial-gradient(circle at 30% 107%, #4285F4 0%, #DB4437 5%, #F4B400 45%,#4285F4 60%,#0F9D58 90%);
+	--instagram: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%,#d6249f 60%,#285AEB 90%);
+}
 
 /* reapply */
 .form-control {
@@ -19,6 +38,10 @@
     @apply rounded bg-blue-500 px-5 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow transition duration-150 ease-in-out hover:bg-blue-600 hover:shadow-lg focus:bg-blue-600 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-900 active:shadow-inner dark:shadow dark:hover:shadow-lg dark:focus:shadow-lg dark:active:shadow-lg
 }
 
+.btn-secondary {
+    @apply rounded bg-white px-5 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-slate-900 shadow transition duration-150 ease-in-out hover:bg-slate-100 hover:shadow-lg focus:bg-slate-100 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-slate-200 active:shadow-inner dark:shadow dark:hover:shadow-lg dark:focus:shadow-lg dark:active:shadow-lg
+}
+
 .btn-unique {
     @apply rounded bg-slate-600 px-5 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow transition duration-150 ease-in-out hover:bg-slate-900 hover:shadow-lg focus:bg-slate-900 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-slate-950 active:shadow-inner dark:shadow dark:hover:shadow-lg dark:focus:shadow-lg dark:active:shadow-lg
 }
@@ -27,17 +50,13 @@
     @apply rounded bg-red-600 px-5 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow transition duration-150 ease-in-out hover:bg-red-700 hover:shadow-lg focus:bg-red-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-red-800 active:shadow-inner dark:shadow dark:hover:shadow-lg dark:focus:shadow-lg dark:active:shadow-lg
 }
 
-.btn-secondary {
-    @apply rounded bg-slate-100 px-5 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-slate-900 shadow transition duration-150 ease-in-out hover:bg-slate-300 hover:shadow-lg focus:bg-slate-300 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-slate-300 active:shadow-inner dark:shadow dark:hover:shadow-lg dark:focus:shadow-lg dark:active:shadow-lg
-}
-
 .empty {
     @apply bg-white rounded shadow-xl uppercase text-slate-300 text-center py-[5em]
 }
 
 @media screen and (max-width:500px) {
     .btn-ux-primary {
-        @apply fixed bottom-[2em] right-[1em] z-[99]
+        @apply fixed bottom-[2em] right-[1em] z-[99] flex flex-col [&>span]:hidden [&>i]:text-2xl py-4 px-5 rounded-full
     }
 
     .btn-secondary {
@@ -51,3 +70,32 @@
 table tbody tr td:not(:only-child):first-child {
     width: 60px !important;
     padding-left: 1em; }
+
+
+.facebook .icon {
+    background-color: var(--facebook); }
+.twitter .icon {
+    background-color: var(--twitter); }
+.tiktok .icon {
+    text-shadow: 1px 1px 0 var(--tiktok-inner);
+    background-color: var(--tiktok); }
+.linkedIn .icon {
+    background-color: var(--linkedin); }
+.youtube .icon {
+    background-color: var(--youtube); }
+.pinterest .icon {
+    background-color: var(--pinterest); }
+.whatsapp .icon {
+    background-color: var(--whatsapp); }
+.snapchat .icon {
+    background-color: var(--snapchat); }
+.telegram .icon {
+    background-color: var(--telegram); }
+.twitch .icon {
+    background-color: var(--twitch); }
+.discord .icon {
+    background-color: var(--discord); }
+.google .icon {
+    background-image: var(--google); }
+.instagram .icon {
+    background-image: var(--instagram); }

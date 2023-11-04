@@ -7,20 +7,20 @@
 			href="{{ $data['back'] }}"
 			data-te-ripple-init>
 			<i class="bx bx-left-arrow-alt"></i>
-			<span>kembali</span>
+			<span>{{ __('kembali') }}</span>
 		</a>
-		@if (count($blog)>0)			
+		@if (count($blog_category)>0)			
 		<a class="btn-danger to-clear"
 			href="{{ $data['delete']['action'] }}"
 			data-message="{{ $data['delete']['message'] }}"
 			data-te-ripple-init>
 			<i class="bx bxs-trash-alt"></i>
-			<span>kosongkan sampah</span>
+			<span>{{ __('kosongkan sampah') }}</span>
 		</a>
 		@endif
 	</div>
 		<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-			@forelse ($blog as $item)
+			@forelse ($blog_category as $item)
 			<div class="flex items-center justify-between rounded-lg bg-white p-4 shadow-lg dark:bg-neutral-700">
                 <div>
                     <h5 class="text-sm lg:text-xl font-medium leading-tight text-neutral-800 mb-2 mr-2 dark:text-neutral-50">
@@ -33,20 +33,20 @@
                 </div>
                 <div>
                     <a class="to-restore btn-secondary flex items-center gap-2"
-                        href="{{ route('blog.bin.restore', $item->id) }}"
+                        href="{{ route('blog-category.bin.restore', $item->id) }}"
                         data-te-ripple-init
                         data-te-ripple-color="light">
                         <i class="bx bx-refresh"></i>
-                        <span>pulihkan</span>
+                        <span>{{ __('pulihkan') }}</span>
                     </a>
                 </div>
 			</div>
 			@empty
-			<div class="empty col-span-3 text-slate-400 text-center py-10 w-full">Kosong</div>
+			<div class="empty col-span-3 text-slate-400 text-center py-10 w-full">{{ __('kosong') }}</div>
 			@endforelse
 		</div>
 		<div class="mt-4">
-			{{ $blog->links('pagination::simple-tailwind') }}
+			{{ $blog_category->links('pagination::simple-tailwind') }}
 		</div>
 </div>
 @endsection

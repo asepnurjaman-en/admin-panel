@@ -24,19 +24,14 @@
 					</svg>
 				</span>
 			</button>
-			<button class="block border-0 bg-transparent px-2 text-neutral-500 hover:no-underline hover:shadow-none focus:no-underline focus:shadow-none focus:outline-none focus:ring-0 dark:text-neutral-200 lg:hidden"
+			<button class="[&>i]:text-xl block border-0 bg-transparent text-neutral-500 hover:no-underline hover:shadow-none focus:no-underline focus:shadow-none focus:outline-none focus:ring-0 dark:text-neutral-200 lg:hidden"
 				type="button"
 				data-te-collapse-init
 				data-te-target="#navbarPrimary"
 				aria-controls="navbarPrimary"
 				aria-expanded="false"
 				aria-label="Toggle navigation">
-				<!-- Hamburger icon -->
-				<span class="[&>svg]:w-7">
-					<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="h-7 w-7">
-						<path fill-rule="evenodd" d="M3 6.75A.75.75 0 013.75 6h16.5a.75.75 0 010 1.5H3.75A.75.75 0 013 6.75zM3 12a.75.75 0 01.75-.75h16.5a.75.75 0 010 1.5H3.75A.75.75 0 013 12zm0 5.25a.75.75 0 01.75-.75h16.5a.75.75 0 010 1.5H3.75a.75.75 0 01-.75-.75z" clip-rule="evenodd" />
-					</svg>
-				</span>
+				<i class="bx bx-dots-vertical-rounded"></i>
 			</button>
 		</div>
 		<div class="!visible hidden flex-grow basis-[100%] items-center lg:!flex lg:basis-auto"
@@ -44,14 +39,23 @@
 			data-te-collapse-item>
 			<ul class="list-style-none mr-auto flex flex-col py-2 lg:py-0 lg:pl-4 lg:flex-row"
 				data-te-navbar-nav-ref>
-				<li class="mb-1 lg:mb-0 lg:pr-2"
+				<li class="mb-1 text-right lg:mb-0 lg:pr-1"
 					data-te-nav-item-ref>
 			  		<!-- Dashboard link -->
-			  		<a class="block text-neutral-500 rounded p-2 transition duration-200 hover:text-neutral-700 hover:ease-in-out focus:text-neutral-700 disabled:text-black/30 motion-reduce:transition-none dark:text-neutral-200 dark:hover:text-neutral-300 dark:focus:text-neutral-300 lg:px-4 [&.active]:text-black/90 dark:[&.active]:text-zinc-400"
-						href="#" 
-						data-te-ripple-init
+			  		<a class="block text-neutral-500 rounded transition duration-200 hover:text-neutral-700 hover:ease-in-out focus:text-neutral-700 disabled:text-black/30 motion-reduce:transition-none dark:text-neutral-200 dark:hover:text-neutral-300 dark:focus:text-neutral-300 lg:px-4 [&.active]:text-black/90 dark:[&.active]:text-zinc-400"
+						href="{{ route('admin.dashboard') }}" 
 						data-te-nav-link-ref>
 						Dashboard
+					</a>
+				</li>
+				<li class="mb-1 text-right lg:mb-0 lg:pr-1"
+					data-te-nav-item-ref>
+					<!-- Logout link -->
+			  		<a class="block lg:hidden text-neutral-500 rounded transition duration-200 hover:text-neutral-700 hover:ease-in-out focus:text-neutral-700 disabled:text-black/30 motion-reduce:transition-none dark:text-neutral-200 dark:hover:text-neutral-300 dark:focus:text-neutral-300 lg:px-4 [&.active]:text-black/90 dark:[&.active]:text-zinc-400"
+					  	href="{{ route('logout') }}"
+						onclick="event.preventDefault();document.getElementById('logout-form').submit();" 
+						data-te-nav-link-ref>
+						Keluar
 					</a>
 				</li>
 			</ul>

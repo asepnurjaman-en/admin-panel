@@ -1,5 +1,5 @@
 @extends('layouts.admin')
-
+@section('title', Str::title($data['title']))
 @section('content')
 <div class="min-h-screen p-3 pb-20">
 	<form action="{{ $data['form']['action'] }}" class="{{ $data['form']['class'] }}" method="post" enctype="multipart/form-data">
@@ -8,14 +8,14 @@
 				href="{{ $data['back'] }}"
 				data-te-ripple-init>
 				<i class="bx bx-left-arrow-alt"></i>
-				<span>kembali</span>
+				<span>{{ __('kembali') }}</span>
 			</a>
 			<button class="btn-primary btn-ux-primary ml-1 inline-block"
 				type="submit"
 				data-te-ripple-init
 				data-te-ripple-color="light">
 				<i class="bx bx-save"></i>
-				<span>simpan</span>
+				<span>{{ __('simpan') }}</span>
 			</button>
 		</div>
 		<div class="mb-3">
@@ -104,7 +104,7 @@
 						</figure>
 					</div>
 					<div class="bg-white shadow-[0_4px_9px_-4px] shadow-slate-300 rounded p-2 mb-2">
-						<div class="relative">
+						<div class="relative mb-2">
 							<input class="mr-2 mt-[0.3rem] h-3.5 w-8 appearance-none rounded-[0.4375rem] bg-neutral-300 before:pointer-events-none before:absolute before:h-3.5 before:w-3.5 before:rounded-full before:bg-transparent before:content-[''] after:absolute after:z-[2] after:-mt-[0.1875rem] after:h-5 after:w-5 after:rounded-full after:border-none after:bg-neutral-100 after:shadow-[0_0px_3px_0_rgb(0_0_0_/_7%),_0_2px_2px_0_rgb(0_0_0_/_4%)] after:transition-[background-color_0.2s,transform_0.2s] after:content-[''] checked:bg-primary checked:after:absolute checked:after:z-[2] checked:after:-mt-[3px] checked:after:ml-[1.0625rem] checked:after:h-5 checked:after:w-5 checked:after:rounded-full checked:after:border-none checked:after:bg-primary checked:after:shadow-[0_3px_1px_-2px_rgba(0,0,0,0.2),_0_2px_2px_0_rgba(0,0,0,0.14),_0_1px_5px_0_rgba(0,0,0,0.12)] checked:after:transition-[background-color_0.2s,transform_0.2s] checked:after:content-[''] hover:cursor-pointer focus:outline-none focus:ring-0 focus:before:scale-100 focus:before:opacity-[0.12] focus:before:shadow-[3px_-1px_0px_13px_rgba(0,0,0,0.6)] focus:before:transition-[box-shadow_0.2s,transform_0.2s] focus:after:absolute focus:after:z-[1] focus:after:block focus:after:h-5 focus:after:w-5 focus:after:rounded-full focus:after:content-[''] checked:focus:border-primary checked:focus:bg-primary checked:focus:before:ml-[1.0625rem] checked:focus:before:scale-100 checked:focus:before:shadow-[3px_-1px_0px_13px_#3b71ca] checked:focus:before:transition-[box-shadow_0.2s,transform_0.2s] dark:bg-neutral-600 dark:after:bg-neutral-400 dark:checked:bg-primary dark:checked:after:bg-primary dark:focus:before:shadow-[3px_-1px_0px_13px_rgba(255,255,255,0.4)] dark:checked:focus:before:shadow-[3px_-1px_0px_13px_#3b71ca]"
 								type="checkbox"
 								role="switch"
@@ -150,7 +150,7 @@
 							</label>
 						</div>
 					</div>
-					<div id="data-article-accordion">
+					<div id="data-blog-accordion">
 						<div class="rounded bg-white shadow-[0_4px_9px_-4px] shadow-slate-300 mb-2">
 							<h2 class="mb-0" id="headingCategory">
 								<button class="group relative flex w-full items-center rounded-t-[15px] border-0 p-2 text-left capitalize text-base text-neutral-800 transition [overflow-anchor:none] hover:z-[2] focus:z-[3] focus:outline-none dark:bg-neutral-800 dark:text-white [&:not([data-te-collapse-collapsed])]:bg-white [&:not([data-te-collapse-collapsed])]:text-primary dark:[&:not([data-te-collapse-collapsed])]:bg-neutral-800 dark:[&:not([data-te-collapse-collapsed])]:text-primary-400"
@@ -161,7 +161,7 @@
 									aria-controls="collapseCategory">
 									<span class="pl-1">
 										kategori
-										<sup for="article_category" class="text-danger hidden">*</sup>
+										<sup for="blog_category" class="text-danger hidden">*</sup>
 									</span>
 									<span class="ml-auto shrink-0 fill-[#336dec] transition-transform duration-200 ease-in-out group-[[data-te-collapse-collapsed]]:rotate-0 group-[[data-te-collapse-collapsed]]:fill-[#212529] motion-reduce:transition-none dark:fill-blue-300 dark:group-[[data-te-collapse-collapsed]]:fill-white">
 										<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
@@ -175,7 +175,7 @@
 								data-te-collapse-item
 								data-te-collapse-show
 								aria-labelledby="headingCategory"
-								data-te-parent="#data-article-accordion">
+								data-te-parent="#data-blog-accordion">
 								<div class="p-2">
 									@if (count($blog_category)>0)
 									<select
@@ -193,13 +193,7 @@
 										@endforelse
 									</select>
 									@else
-									<a class="block rounded bg-primary-100 px-6 pb-2 pt-2.5 text-xs text-center font-medium uppercase leading-normal text-primary-700 transition duration-150 ease-in-out hover:bg-primary-accent-100 focus:bg-primary-accent-100 focus:outline-none focus:ring-0 active:bg-primary-accent-200"
-										href="{{ route('article-category.index') }}"
-										target="_BLANK"
-										data-te-ripple-init>
-											<i class="bx bx-objects-horizontal-left"></i>
-										<span>kelola kategori</span>
-									</a>
+									<div class="empty">{{ __('belum ada ketegori') }}</div>
 									@endif
 								</div>
 							</div>

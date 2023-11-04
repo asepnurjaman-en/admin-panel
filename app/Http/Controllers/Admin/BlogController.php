@@ -30,6 +30,7 @@ class BlogController extends Controller
 		$data = [
 			'title' => 'berita rilis',
 			'list'	=> route('blog.datatable'),
+			'uncategorized'	=> route('blog.uncategorized'),
 			'bin'	=> route('blog.bin'),
 			'create'=> ['action' => route('blog.create')],
 			'delete'=> ['message' => 'Hapus berita?'],
@@ -229,7 +230,7 @@ class BlogController extends Controller
 	 */
 	public function datatable() : JsonResponse
 	{
-		$data = Blog::select('id', 'title', 'reads', 'publish', 'blog_category_id')->withCount('comments')->latest();
+		$data = Blog::select('id', 'title', 'reads', 'publish', 'blog_category_id')->has('category')->withCount('comments')->latest();
 		$data = $data->get();
 		$collection = $data->map(function($item) {
 			$item['edit'] = route('blog.edit', $item->id);
@@ -259,6 +260,55 @@ class BlogController extends Controller
 		});
 		return response()->json($collection);
 	}
+
+	/**
+	 * Uncategorized Display a listing of the resource.
+	 */
+	public function uncategorized() : Response
+	{
+		$data = [
+			'title' => 'blog tak terorganisasi',
+			'list'	=> route('blog.uncategorized.datatable'),
+			'back'  => route('blog.index'),
+			'delete'=> ['message' => 'Hapus berita?'],
+		];
+
+		return response()->view('admin.blog.uncategorized', compact('data'));
+	}
+
+	/**
+	 * Call to datatable
+	 */
+	public function uncategorized_datatable() : JsonResponse
+	{
+		$data = Blog::select('id', 'title', 'reads', 'publish')->doesntHave('category')->withCount('comments')->latest();
+		$data = $data->get();
+		$collection = $data->map(function($item) {
+			$item['edit'] = route('blog.edit', $item->id);
+			$item['log'] = route('blog.log', $item->id);
+			$item['delete'] = route('blog.destroy', $item->id);
+			$item['message'] = "{$item->title} dipindahkan ke keranjang sampah";
+			if ($item->publish=='publish') :
+				$item->status_text = "Rilis";
+			elseif ($item->publish=='draft') :
+				$item->status_text = "Draft";
+			elseif ($item->publish=='schedule') :
+				$item->status_text = "Dijadwalkan";
+			endif;
+			$item['title'] = "<strong class=\"block text-slate-400\" data-an-edit=\"{$item['edit']}\">
+								{$item->title}
+							</strong>
+							<small class=\"leading-none font-semibold uppercase whitespace-nowrap bg-slate-100 text-slate-400 p-1 mr-2\">
+								{$item->status_text}
+							</small>
+							<small class=\"leading-none text-slate-400 mr-2\">[uncategorized]</small>
+							<small class=\"leading-none text-slate-400 underline mr-2\"><a href=\"".route('blog-comment.show', $item->id)."\">{$item->comments_count} komentar</a></small>
+							<small class=\"leading-none text-slate-400 mr-2\">{$item->reads} dilihat</small>";
+			return $item;
+		});
+		return response()->json($collection);
+	}
+
 	/**
 	 * Activity log
 	 */
@@ -266,7 +316,7 @@ class BlogController extends Controller
 	{
 		$blog = Blog::find($id);
 		$log = Activity::forSubject($blog)->latest()->get();
-		$response = "<ol class=\"border-l border-neutral-300 dark:border-neutral-500\">";
+		$response = "<ol class=\"border-l border-neutral-300 dark:border-neutral-500 pb-2\">";
 		foreach ($log as $key => $item) :
 			if ($item->event=='created') :
 				$item->title = "Dibuat";
@@ -286,7 +336,7 @@ class BlogController extends Controller
 			$response .= "<div class=\"-ml-[5px] mr-3 h-[9px] w-[9px] rounded-full bg-neutral-300 dark:bg-neutral-500\"></div>";
 			$response .= "<p class=\"text-sm text-neutral-500 dark:text-neutral-300\"><span class=\"text-{$item->color}-700 font-bold\">{$item->title}</span> {$item->date} oleh <span class=\"font-bold\">{$item->causer}</span></p>";
 			$response .= "</div>";
-			$response .= "<div class=\"mb-4 ml-4 mt-2\">";
+			$response .= "<div class=\"block mb-4 ml-4 mt-2\">";
 			$response .= "<table class=\"w-full border\">";
 			foreach ($log->property->attributes ?? [] as $col => $val) :
 				$response .= "<tr>";

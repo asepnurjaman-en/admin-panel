@@ -57,19 +57,6 @@ const SwalError = Swal.mixin({
 });
 
 /**
- * Change type of SideNav
- */
-function updateSidenavHiddenAttribute() {
-	const sidenav = document.getElementById('navbarSide');
-	if (window.innerWidth < 640) {
-		sidenav.setAttribute('data-te-sidenav-hidden', 'true');
-	} else {
-		sidenav.setAttribute('data-te-sidenav-hidden', 'false');
-	}
-}
-updateSidenavHiddenAttribute();
-window.addEventListener('resize', updateSidenavHiddenAttribute);
-/**
  * Button SideNav
  */
 $("#navbarSide-toggler").on("click", function() {

@@ -1,5 +1,5 @@
 @extends('layouts.admin')
-
+@section('title', Str::title($data['title']))
 @section('content')
 <section class="min-h-screen p-3">
 	<div class="flex flex-wrap justify-between gap-2 mb-3">
@@ -9,7 +9,7 @@
 				data-te-ripple-init
 				data-te-ripple-color="light">
 				<i class="bx bx-plus"></i>
-				<span>tulis blog</span>
+				<span>{{ __('tulis blog') }}</span>
 			</a>
 			<button class="btn-secondary inline-block"
 				type="button"
@@ -18,16 +18,23 @@
 				data-te-ripple-init
 				data-te-ripple-color="light">
 				<i class="bx bx-carousel"></i>
-				<span>kategori</span>
+				<b>{{ __('kategori') }}</b>
 			</button>
 		</div>
 		<div class="flex gap-2">
+			<a class="btn-secondary"
+				href="{{ $data['uncategorized'] }}"
+				data-te-ripple-init
+				data-te-ripple-color="light">
+				<i class="bx bx-hide"></i>
+				<span>{{ __('tak terorganisasi') }}</span>
+			</a>
 			<a class="btn-secondary"
 				href="{{ $data['bin'] }}"
 				data-te-ripple-init
 				data-te-ripple-color="light">
 				<i class="bx bx-trash"></i>
-				<span>keranjang sampah</span>
+				<span>{{ __('keranjang sampah') }}</span>
 			</a>
 			@if ($data['comment']['show']===true)			
 			<a class="btn-secondary relative"
@@ -40,7 +47,7 @@
 				</div>
 				@endif
 				<i class="bx bx-message-square-dots"></i>
-				<span>komentar</span>
+				<span>{{ __('permintaan komentar') }}</span>
 			</a>
 			@endif
 		</div>
@@ -91,42 +98,21 @@
 		</button>
 	</div>
 	<div class="offcanvas-body flex-grow overflow-y-auto px-3 py-2">
-		<div class="rounded shadow-lg p-3">
-			<form action="{{ route('blog-category.store') }}" method="post" class="to-store">
-				@csrf
-				<div class="relative mt-3 mb-1" 
-					data-te-input-wrapper-init>
-					<input class="peer form-control"
-						type="text"
-						name="category_title" 
-						id="category_title" 
-						value="{{ old('category_title') }}" 
-						placeholder="Kategori" 
-						required>
-					<label class="control-label"
-						for="category_title">
-						{{ __('Kategori Baru') }}
-						@error('category_title')
-						<span class="text-red-700">*</span>
-						@enderror
-					</label>
-				</div>
-				@error('category_title')
-				<small class="text-red-500">{{ $message }}</small>
-				@enderror
-				<div class="mt-4 flex items-center justify-between">
-					<button class="btn-primary w-full"
-						type="submit" 
-						data-te-ripple-init data-te-ripple-color="light">Buat kategori baru</button>
-				</div>
-			</form>
-		</div>
+		<button class="btn-primary w-full"
+			type="button"
+			data-te-ripple-init
+			data-te-toggle="modal"
+			data-te-target="#modalCreateCategory"
+			data-te-ripple-color="light">
+			<i class="bx bx-plus"></i>
+			{{ __('tambah kategori baru') }}
+		</button>
 		<hr class="my-2">
 		@forelse ($blog_category as $item)
 		<a class="flex justify-between items-center bg-white rounded shadow p-3 my-2 transition hover:bg-slate-100"
 			data-te-ripple-init
 			data-te-ripple-color="dark"
-			href="#">
+			href="{{ route('blog-category.edit', $item->id) }}">
 			<div>
 				<h5 class="font-bold text-base mb-0">{{ $item->title }}</h5>
 				<span class="text-slate-300 text-sm">{{ __($item->blogs_count.' Blog') }}</span>
@@ -136,16 +122,16 @@
 			</span>
 		</a>
 		@empty
-		<div class="empty">Belum ada kategori</div>
+		<div class="empty">{{ __('belum ada kategori') }}</div>
 		@endforelse
 	</div>
 	<div class="offcanvas-footer p-3">
 		<a class="btn-secondary block w-full text-center"
-			href="{{ $data['bin'] }}"
+			href="{{ route('blog-category.bin') }}"
 			data-te-ripple-init
 			data-te-ripple-color="light">
-			<i class="bx bxs-carousel"></i>
-			<span>kelola kategori</span>
+			<i class="bx bx-trash"></i>
+			<span>{{ __('keranjang sampah') }}</span>
 		</a>
 	</div>
 </div>
@@ -155,5 +141,6 @@
 @endpush
 
 @push('script')
+@include('layouts.component.modal-create-blog-category')
 @include('layouts.component.modal-log')
 @endpush

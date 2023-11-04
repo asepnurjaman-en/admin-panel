@@ -4,7 +4,7 @@
 			'title' => 'berita',
 			'menu'	=> [
 				[
-					'id'	=> ['blog.index', 'blog.create', 'blog.edit', 'blog.bin', 'blog-comment.show'],
+					'id'	=> ['blog.index', 'blog.create', 'blog.edit', 'blog.bin', 'blog.uncategorized', 'blog-comment.index', 'blog-category.edit'],
 					'title'	=> 'berita',
 					'url'	=> route('blog.index'),
 					'icon'	=> 'bx bx-news',
@@ -46,25 +46,25 @@
 				[
 					'id'	=> ['link.index.social', 'link.index.ecommerce'],
 					'title'	=> 'media sosial',
-					'url'	=> ('link.index.social'),
+					'url'	=> route('link.index.social'),
 					'icon'	=> 'bx bx-share-alt',
 					'sub'	=> [
 						[
 							'id'	=> ['link.index.social'],
 							'title'	=> 'media sosial',
-							'url'	=> ('link.index.social'),
+							'url'	=> route('link.index.social'),
 						],
 						[
 							'id'	=> ['link.index.ecommerce'],
 							'title'	=> 'toko online',
-							'url'	=> ('link.index.ecommerce'),
+							'url'	=> route('link.index.ecommerce'),
 						]
 					]
 				],
 				[
 					'id'	=> ['contact.index'],
 					'title'	=> 'kontak',
-					'url'	=> ('contact.index'),
+					'url'	=> route('contact.index'),
 					'icon'	=> 'bx bx-comment',
 					'sub'	=> []
 				],
@@ -115,7 +115,7 @@
 				<ul class="!visible relative my-1 mx-0 hidden list-none p-0 data-[te-collapse-show]:block "
 					data-te-sidenav-collapse-ref>
 					@foreach($nav_item['sub'] as $nav_child)
-					<li class="relative data-[te-sidenav-state-active]:[&>a]:bg-slate-600 data-[te-sidenav-state-active]:[&>a]:hover:bg-slate-700 data-[te-sidenav-state-active]:[&>a]:text-white data-[te-sidenav-state-active]:[&>a]:hover:text-white">
+					<li class="relative data-[te-sidenav-state-active]:[&>a]:bg-slate-100 data-[te-sidenav-state-active]:[&>a]:hover:bg-slate-200 data-[te-sidenav-state-active]:[&>a]:text-blue-600 data-[te-sidenav-state-active]:[&>a]:hover:text-blue-700">
 						<a class="flex h-6 cursor-pointer capitalize items-center truncate rounded-[5px] py-4 pl-[2rem] pr-6 text-[0.78rem] text-gray-600 outline-none transition duration-300 ease-linear hover:bg-slate-50 hover:text-inherit hover:outline-none focus:bg-slate-50 focus:text-inherit focus:outline-none active:bg-slate-50 active:text-inherit active:outline-none data-[te-sidenav-state-active]:text-inherit data-[te-sidenav-state-focus]:outline-none motion-reduce:transition-none dark:text-gray-300 dark:hover:bg-white/10 dark:focus:bg-white/10 dark:active:bg-white/10"
 							href="{{ $nav_child['url'] }}"
 							{{ (in_array(Route::currentRouteName(), $nav_child['id'])) ? 'data-te-sidenav-state-active' : null }}
@@ -138,15 +138,5 @@
 			@endforeach
 			@endforeach
 		</ul>
-	</div>
-	<div class="absolute border-t border-gray-300 bottom-0 w-full bg-inherit text-center py-2">
-		<button class="btn-danger flex items-center mx-auto"
-			data-te-ripple-init
-  			data-te-ripple-color="light"
-  			type="button">
-			<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-				<path stroke-linecap="round" stroke-linejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15m3 0l3-3m0 0l-3-3m3 3H9" />
-			</svg>
-		</button>
 	</div>
 </nav>

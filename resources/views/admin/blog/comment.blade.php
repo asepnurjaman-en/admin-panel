@@ -1,5 +1,5 @@
 @extends('layouts.admin')
-
+@section('title', Str::title($data['title']))
 @section('content')
 <div class="min-h-screen p-3">
 	<div class="flex flex-wrap justify-between gap-2 mb-3">
