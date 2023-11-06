@@ -66,37 +66,33 @@
 		<div class="relative"
 			data-te-dropdown-ref>
 			<!-- Second dropdown trigger -->
-			<a class="hidden-arrow !visible hidden items-center whitespace-nowrap transition duration-150 ease-in-out lg:flex motion-reduce:transition-none"
+			<a class="[&>span]:capitalize hidden-arrow !visible hidden items-center whitespace-nowrap transition duration-150 ease-in-out pr-3 lg:flex motion-reduce:transition-none"
 				href="#"
 				id="dropdownAvatar"
 				role="button"
 				data-te-dropdown-toggle-ref
 				aria-expanded="false">
-			  	<!-- User avatar -->
-			  	<img class="rounded-full h-[35px] w-[35px] mr-2"
-				  	src="https://tecdn.b-cdn.net/img/new/avatars/2.jpg"
-					alt=""
-					loading="lazy" />
 				<span>{{ Auth::user()->name }}</span>
 			</a>
-			<!-- Second dropdown menu -->
-			<ul class="absolute left-auto right-0 z-[1000] float-left m-0 mt-1 hidden min-w-max list-none overflow-hidden rounded-lg border-none bg-white bg-clip-padding text-left text-base shadow-lg dark:bg-neutral-700 [&[data-te-dropdown-show]]:block"
+			<ul class="absolute left-0 right-0 z-[1000] float-left m-0 mt-1 hidden min-w-max list-none overflow-hidden rounded-lg border-none bg-white bg-clip-padding text-left text-base shadow-lg dark:bg-neutral-700 [&[data-te-dropdown-show]]:block"
 				aria-labelledby="dropdownAvatar"
 				data-te-dropdown-menu-ref>
-			  	<!-- Second dropdown menu items -->
 			  	<li>
-					<a class="block w-full whitespace-nowrap bg-transparent px-4 py-2 text-sm font-normal text-neutral-700 hover:bg-neutral-100 active:text-neutral-800 active:no-underline disabled:pointer-events-none disabled:bg-transparent disabled:text-neutral-400 dark:text-neutral-200 dark:hover:bg-white/30"
-						{{-- href="{{ route('user.profile', Auth::user()->role) }}" --}}
+					<a class="[&>span]:capitalize block w-full whitespace-nowrap bg-transparent px-4 py-3 text-sm font-normal text-neutral-700 hover:bg-neutral-100 active:text-neutral-800 active:no-underline disabled:pointer-events-none disabled:bg-transparent disabled:text-neutral-400 dark:text-neutral-200 dark:hover:bg-white/30"
+						href="{{ route('profile.index') }}"
 						data-te-dropdown-item-ref>
-						Action
+						<i class="bx bx-user-circle"></i>
+						<span>{{ __('profil') }}</span>
 					</a>
 			  	</li>
-			  	<!-- Second dropdown menu items -->
 			  	<li>
-					<a class="block w-full whitespace-nowrap bg-transparent px-4 py-2 text-sm font-normal text-neutral-700 hover:bg-neutral-100 active:text-neutral-800 active:no-underline disabled:pointer-events-none disabled:bg-transparent disabled:text-neutral-400 dark:text-neutral-200 dark:hover:bg-white/30" 
+					<a class="[&>span]:capitalize [&>i]:text-red-500  block w-full whitespace-nowrap bg-transparent px-4 py-3 text-sm font-normal text-neutral-700 hover:bg-neutral-100 active:text-neutral-800 active:no-underline disabled:pointer-events-none disabled:bg-transparent disabled:text-neutral-400 dark:text-neutral-200 dark:hover:bg-white/30" 
 						href="{{ route('logout') }}"
 						onclick="event.preventDefault();document.getElementById('logout-form').submit();" 
-						data-te-dropdown-item-ref>Keluar</a>
+						data-te-dropdown-item-ref>
+						<i class="bx bx-log-out"></i>
+						<span>{{ __('keluar') }}</span>
+					</a>
 					<form class="d-none" id="logout-form" action="{{ route('logout') }}" method="POST">
 						@csrf
 					</form>

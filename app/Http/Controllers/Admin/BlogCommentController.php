@@ -28,6 +28,11 @@ class BlogCommentController extends Controller
         }])->latest()->get();
 		$data = [
 			'title' => 'komentar',
+			'breadcrumb' => [
+                ['title' => 'Dasbor', 'url' => route('admin.dashboard')],
+                ['title' => 'Blog', 'url' => route('blog.index')],
+                ['title' => 'Permintaan komentar', 'url' => '#'],
+            ],
             'back'  => route('blog.index'),
 		];
 
@@ -42,6 +47,11 @@ class BlogCommentController extends Controller
 		$blog_comments = Blog::whereHas('comments')->whereId($id)->get();
 		$data = [
 			'title' => 'komentar',
+			'breadcrumb' => [
+                ['title' => 'Dasbor', 'url' => route('admin.dashboard')],
+                ['title' => 'Blog', 'url' => route('blog.index')],
+                ['title' => 'Komentar', 'url' => '#'],
+            ],
             'back'  => route('blog.index'),
 		];
 

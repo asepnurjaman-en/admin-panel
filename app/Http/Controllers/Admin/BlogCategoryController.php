@@ -67,6 +67,11 @@ class BlogCategoryController extends Controller
         $blog_category = BlogCategory::findOrFail($id);
         $data = [
 			'title'	=> $blog_category->title,
+			'breadcrumb' => [
+                ['title' => 'Dasbor', 'url' => route('admin.dashboard')],
+                ['title' => 'Blog', 'url' => route('blog.index')],
+                ['title' => 'Edit kategori', 'url' => '#'],
+            ],
             'back'  => route('blog.index'),
 			'form'	=> ['action' => route('blog-category.update', $blog_category->id), 'class' => 'to-update'],
             'delete'=> ['action' => route('blog-category.destroy', $blog_category->id), 'message' => 'Kategori akan dipindahkan ke keranjang sampah.']
@@ -118,6 +123,11 @@ class BlogCategoryController extends Controller
 		$blog_category = BlogCategory::onlyTrashed()->paginate(30);
 		$data = [
 			'title' => 'sampah kategori',
+			'breadcrumb' => [
+                ['title' => 'Dasbor', 'url' => route('admin.dashboard')],
+                ['title' => 'Blog', 'url' => route('blog.index')],
+                ['title' => 'Keranjang sampah', 'url' => '#'],
+            ],
             'back'  => route('blog.index'),
 			'delete'=> ['action' => route('blog-category.bin.clear'), 'message' => 'Kategori akan dihapus permanen']
 		];

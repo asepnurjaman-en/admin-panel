@@ -2,6 +2,7 @@
 @section('title', Str::title($data['title']))
 @section('content')
 <section class="min-h-screen p-3">
+    @include('layouts.component.breadcrumb', ['breadcrumb'=>$data['breadcrumb']])
 	<div class="flex flex-wrap justify-between gap-2 mb-3">
 		<div class="flex gap-2">
 			<a class="btn-primary btn-ux-primary inline-block"

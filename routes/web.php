@@ -1,11 +1,12 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin\AccountController AS AdminAccount;
 use App\Http\Controllers\Admin\AdditionalController AS AdminAdditional;
 use App\Http\Controllers\Admin\BlogController AS AdminBlog;
-use App\Http\Controllers\Admin\DashboardController AS AdminDashboard;
 use App\Http\Controllers\Admin\BlogCommentController AS AdminBlogComment;
 use App\Http\Controllers\Admin\BlogCategoryController AS AdminBlogCategory;
+use App\Http\Controllers\Admin\DashboardController AS AdminDashboard;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,7 +26,14 @@ Route::get('/', function () {
 Auth::routes();
 Route::prefix('admin')->middleware('role:developer,admin')->group(function() {
     Route::get('/', [AdminDashboard::class, 'index'])->name('admin.dashboard');
-    Route::get('strbox/table', [AdminDashboard::class, 'strbox_datatable'])->name('strbox.datatable');
+    Route::get('table/strbox', [AdminDashboard::class, 'strbox_datatable'])->name('strbox.datatable');
+    /** Account */
+    Route::get('profile', [AdminAccount::class, 'profile'])->name('profile.index');
+    Route::get('profile/edit', [AdminAccount::class, 'edit_profile'])->name('profile.edit');
+    Route::patch('profile/update', [AdminAccount::class, 'update_profile'])->name('profile.update');
+    Route::get('profile/edit/password', [AdminAccount::class, 'edit_password'])->name('profile.edit-password');
+    Route::patch('profile/password/update', [AdminAccount::class, 'update_password'])->name('profile.update-password');
+    Route::resource('account', AdminAccount::class);
     /** Additional */
     Route::get('contact', [AdminAdditional::class, 'contact'])->name('contact.index');
     Route::put('contact/update', [AdminAdditional::class, 'contact_update'])->name('contact.update');

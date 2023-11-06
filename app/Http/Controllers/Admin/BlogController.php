@@ -28,7 +28,11 @@ class BlogController extends Controller
 	{
 		$blog_category = BlogCategory::withCount('blogs')->latest()->get();
 		$data = [
-			'title' => 'berita rilis',
+			'title' => 'blog',
+			'breadcrumb' => [
+                ['title' => 'Dasbor', 'url' => route('admin.dashboard')],
+                ['title' => 'Blog', 'url' => '#'],
+            ],
 			'list'	=> route('blog.datatable'),
 			'uncategorized'	=> route('blog.uncategorized'),
 			'bin'	=> route('blog.bin'),
@@ -52,6 +56,11 @@ class BlogController extends Controller
         $blog_category = BlogCategory::withCount('blogs')->latest()->get();
         $data = [
 			'title'	=> 'buat blog',
+			'breadcrumb' => [
+                ['title' => 'Dasbor', 'url' => route('admin.dashboard')],
+                ['title' => 'Blog', 'url' => route('blog.index')],
+                ['title' => 'Blog baru', 'url' => '#'],
+            ],
             'back'  => route('blog.index'),
 			'form'	=> ['action' => route('blog.store'), 'class' => 'to-store']
 		];
@@ -140,6 +149,11 @@ class BlogController extends Controller
 		$blog = Blog::findOrFail($id);
         $data = [
 			'title'	=> 'edit blog',
+			'breadcrumb' => [
+                ['title' => 'Dasbor', 'url' => route('admin.dashboard')],
+                ['title' => 'Blog', 'url' => route('blog.index')],
+                ['title' => 'Edit blog', 'url' => '#'],
+            ],
             'back'  => route('blog.index'),
 			'form'	=> ['action' => route('blog.update', $blog->id), 'class' => 'to-update']
 		];
@@ -268,6 +282,11 @@ class BlogController extends Controller
 	{
 		$data = [
 			'title' => 'blog tak terorganisasi',
+			'breadcrumb' => [
+                ['title' => 'Dasbor', 'url' => route('admin.dashboard')],
+                ['title' => 'Blog', 'url' => route('blog.index')],
+                ['title' => 'Blog tak terorganisasi', 'url' => '#'],
+            ],
 			'list'	=> route('blog.uncategorized.datatable'),
 			'back'  => route('blog.index'),
 			'delete'=> ['message' => 'Hapus berita?'],
@@ -368,6 +387,11 @@ class BlogController extends Controller
 		$blog = Blog::onlyTrashed()->paginate(30);
 		$data = [
 			'title' => 'sampah blog',
+			'breadcrumb' => [
+                ['title' => 'Dasbor', 'url' => route('admin.dashboard')],
+                ['title' => 'Blog', 'url' => route('blog.index')],
+                ['title' => 'Keranjang sampah', 'url' => '#'],
+            ],
             'back'  => route('blog.index'),
 			'delete'=> ['action' => route('blog.bin.clear'), 'message' => 'Blog akan dihapus permanen']
 		];

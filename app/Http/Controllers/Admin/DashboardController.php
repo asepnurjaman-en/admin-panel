@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Models\Blog;
 use App\Models\Strbox;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Http\JsonResponse;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class DashboardController extends Controller
 {
@@ -17,7 +19,17 @@ class DashboardController extends Controller
 
     public function index() : Response
     {
-        return response()->view('admin.dashboard');
+        $blog = [
+            'count' => Blog::count(),
+            'url' => route('blog.index'),
+        ];
+        $data = [
+            'title' => 'selamat datang '.Auth::user()->name,
+            'breadcrumb' => [
+                ['title' => 'Dasbor', 'url' => '#'],
+            ],
+        ];
+        return response()->view('admin.dashboard', compact('data', 'blog'));
     }
 
     public function strbox_datatable() : JsonResponse

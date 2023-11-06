@@ -2,6 +2,7 @@
 @section('title', Str::title($data['title']))
 @section('content')
 <div class="min-h-screen p-3 pb-20">
+    @include('layouts.component.breadcrumb', ['breadcrumb'=>$data['breadcrumb']])
     <div class="flex justify-between mb-3 pb-3">
         <a class="btn-secondary inline-block"
             href="{{ $data['back'] }}"
